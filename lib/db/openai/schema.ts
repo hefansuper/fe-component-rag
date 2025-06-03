@@ -1,4 +1,4 @@
-//创建openai embeddings表
+//创建openai embeddings表，这个地方就是来设置表结构及其对应字段的信息
 
 import { index, pgTable, text, varchar, vector } from 'drizzle-orm/pg-core';
 // 导入 nanoid 用于生成唯一 ID

@@ -60,7 +60,7 @@ cp .env.template .env
 # 数据库连接字符串：从supabase中获取（https://supabase.com/）
 DATABASE_URL=postgresql://
 # 嵌入模型
-EMBEDDING=text-embedding-ada-002
+EMBEDDING=text-embedding-3-small
 # 大模型 API Key
 AI_KEY=sk-xxx
 # 大模型 API Base URL

@@ -25,7 +25,7 @@ interface EmbeddingResult {
  */
 export async function getEmbeddings(
   text: string,
-  model: string = env.EMBEDDING || 'text-embedding-ada-002',
+  model: string = env.EMBEDDING || 'text-embedding-3-small',
   chunkSeparator: string = '-------split line-------',
   chunkSize: number = 8000
 ): Promise<EmbeddingResult[]> {

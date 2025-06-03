@@ -1,12 +1,6 @@
-/*
- * @Author: stephenHe
- * @Date: 2025-03-12 11:10:04
- * @LastEditors: stephenHe
- * @LastEditTime: 2025-03-12 14:20:44
- * @Description: 保存embedding数据到数据库中
- * @FilePath: /fe-components-rag/lib/db/openai/actions.ts
- */
 'use server';
+
+// 保存embedding数据到数据库中
 
 import { db } from '../index';
 import { openAiEmbeddings } from './schema';
