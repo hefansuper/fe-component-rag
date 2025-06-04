@@ -16,7 +16,7 @@ interface EmbeddingResult {
 }
 
 /**
- * 将文本转换为向量嵌入
+ * 将文本转换为向量嵌入，适用于将文档转换为向量
  * @param text 输入文本
  * @param model 使用的嵌入模型，默认使用环境变量中配置的模型
  * @param chunkSeparator 文本分块的分隔符，如果提供则按此分隔符分块处理
@@ -106,4 +106,26 @@ export function cosineSimilarity(vecA: number[], vecB: number[]): number {
   }
 
   return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+}
+
+// 生成单个的embedding，适用于用户输入的场景，根据用户的输入生成对应的向量embedding
+export async function generateSingleEmbedding(text: string): Promise<number[]> {
+  try {
+    // 如果文本为空，抛出错误
+    if (!text || text.trim() === '') {
+      throw new Error('输入文本不能为空');
+    }
+
+    // 直接调用 OpenAI API 生成单个文本的嵌入向量
+    const embeddingResponse = await openai.embeddings.create({
+      model: env.EMBEDDING || 'text-embedding-3-small',
+      input: text.trim()
+    });
+
+    // 返回第一个（也是唯一一个）嵌入向量
+    return embeddingResponse.data[0].embedding;
+  } catch (error) {
+    console.error('生成单个嵌入向量时出错:', error);
+    throw error;
+  }
 }
