@@ -12,7 +12,10 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx lib/db/migrate.ts",
     "db:push": "drizzle-kit push",
-    "openai:embedding": "tsx app/api/openai/embedDocs.ts"
+    "openai:embedding": "tsx app/api/openai/embedDocs.ts",
+    "example:usercard": "tsx app/api/openai/component-dev-example.ts usercard",
+    "example:optimize": "tsx app/api/openai/component-dev-example.ts optimize",
+    "example:batch": "tsx app/api/openai/component-dev-example.ts batch"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.0.5",

@@ -2,6 +2,7 @@
 
 import OpenAI from 'openai';
 import { env } from '../../../lib/env.mjs';
+import { vectorSimilaritySearch } from './selectors';
 
 // 创建 OpenAI 客户端实例
 const openai = new OpenAI({
@@ -127,5 +128,45 @@ export async function generateSingleEmbedding(text: string): Promise<number[]> {
   } catch (error) {
     console.error('生成单个嵌入向量时出错:', error);
     throw error;
+  }
+}
+
+// 根据用户输入的信息，检索召回
+// topK 为检索召回的个数
+export async function searchRetrieval(
+  text: string,
+  topK: number = 5
+): Promise<{
+  success: boolean;
+  results?: Array<{
+    id: string;
+    content: string;
+    similarity: number;
+  }>;
+  error?: string;
+}> {
+  try {
+    // 生成用户输入的嵌入向量
+    const userEmbedding = await generateSingleEmbedding(text);
+
+    // 从数据库中检索出相似度最高的N个结果
+    const results = await vectorSimilaritySearch({
+      queryEmbedding: userEmbedding,
+      threshold: 0.7,
+      limit: topK
+    });
+
+    // 返回检索结果，包含内容和相似度分数
+    return {
+      success: results.success,
+      results: results.results,
+      error: results.error
+    };
+  } catch (error) {
+    console.error('检索召回时出错:', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : '未知错误'
+    };
   }
 }
