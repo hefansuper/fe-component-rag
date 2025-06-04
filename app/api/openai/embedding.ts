@@ -152,7 +152,7 @@ export async function searchRetrieval(
     // 从数据库中检索出相似度最高的N个结果
     const results = await vectorSimilaritySearch({
       queryEmbedding: userEmbedding,
-      threshold: 0.7,
+      threshold: 0.01, // 降低阈值以获取更多相关结果
       limit: topK
     });
 

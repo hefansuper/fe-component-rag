@@ -13,6 +13,7 @@ type Message = {
   role: 'user' | 'assistant' | 'tool';
   content: string | MessageContent[];
   ragDocs?: RAGDocument[];
+  imageUrl?: string;
 };
 
 interface ChatMessagesProps {

@@ -79,8 +79,6 @@ export async function vectorSimilaritySearch(params: SimilaritySearchParams): Pr
     const queryVector = `[${queryEmbedding.join(',')}]`;
 
     // 使用原生 SQL 查询计算余弦相似度
-    // 余弦相似度公式: 1 - (cosine_distance)
-    // cosine_distance 使用 pgvector 的 <=> 操作符
     const results = await db.execute(sql`
       SELECT 
         id,
